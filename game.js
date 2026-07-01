@@ -193,7 +193,8 @@ function updatePlayer() {
         playerEl.classList.remove('facing-right');
     }
     
-    playerEl.style.backgroundImage = `url('assets/player/${spriteDir}.png')`;
+    // CORRECTED PATH: Look directly in assets/ folder
+    playerEl.style.backgroundImage = `url('assets/${spriteDir}.png')`;
     playerEl.style.backgroundPosition = `${player.frameX * 50}% ${player.frameY * 50}%`;
 
     updateCamera();
@@ -347,7 +348,8 @@ function rebuildEntities() {
     gameState.chickens.forEach(data => {
         const el = document.createElement('div');
         el.className = 'sprite chicken-sprite';
-        el.style.backgroundImage = `url('assets/chickens/${data.type}.png')`;
+        // CORRECTED PATH: Look directly in assets/ folder
+        el.style.backgroundImage = `url('assets/${data.type}.png')`;
         entitiesLayer.appendChild(el);
         
         activeChickens.push({ data, el });
@@ -357,7 +359,8 @@ function rebuildEntities() {
     gameState.eggs.forEach(egg => {
         const el = document.createElement('div');
         el.className = 'sprite egg-sprite';
-        el.style.backgroundImage = `url('assets/farm/egg.png')`;
+        // CORRECTED PATH: Look directly in assets/ folder
+        el.style.backgroundImage = `url('assets/egg.png')`;
         el.style.left = `${egg.x - 12}px`;
         el.style.top = `${egg.y - 12}px`;
         el.style.width = '24px';
