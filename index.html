@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Premium mobile settings: no zooming, scalable=no, full screen -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Study Farm Simulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Game World -->
+    <div id="game-container">
+        
+        <!-- Day/Night and Weather Overlays -->
+        <div id="weather-layer"></div>
+        <div id="time-overlay"></div>
+
+        <!-- Camera / Map Layer -->
+        <div id="world">
+            <!-- Background Map Tiles (populated by JS or CSS backgrounds) -->
+            <div id="map-background"></div>
+            
+            <!-- Static Image Buildings -->
+            <div id="house-building" class="building">
+                <img src="assets/buildings/house.png" alt="House">
+                <div class="interact-zone" id="house-zone">🏠 Enter</div>
+            </div>
+            
+            <div id="atm-building" class="building">
+                <img src="assets/buildings/atm.png" alt="ATM">
+                <div class="interact-zone" id="atm-zone">🏧 Use ATM</div>
+            </div>
+
+            <!-- CSS-Only Chicken Farm -->
+            <div id="chicken-farm">
+                <!-- Fences -->
+                <div class="fence top-fence"></div>
+                <div class="fence left-fence"></div>
+                <div class="fence right-fence"></div>
+                <div class="fence bottom-fence"></div>
+                <!-- Interactive Gate -->
+                <div id="farm-gate" class="gate closed"></div>
+                <!-- CSS-Only Coop -->
+                <div id="chicken-coop">
+                    <div class="roof"></div>
+                    <div class="coop-body">
+                        <div class="doorway"></div>
+                    </div>
+                </div>
+                <!-- Farm interaction zone -->
+                <div class="interact-zone" id="farm-zone">🍗 Feed (₹200)</div>
+            </div>
+
+            <!-- Entities Layer (Player, Chickens, Eggs are spawned here) -->
+            <div id="entities-layer">
+                <div id="player" class="sprite front idle breathing"></div>
+            </div>
+        </div>
+
+        <!-- User Interface -->
+        <div id="ui-layer">
+            <div id="top-bar">
+                <div class="stat">💰 <span id="ui-money">0</span></div>
+                <div class="stat">⭐ <span id="ui-xp">0</span> Lvl <span id="ui-level">1</span></div>
+                <div class="stat">🐔 <span id="ui-chickens">10</span></div>
+                <div class="stat">🥚 <span id="ui-eggs">0</span></div>
+                <div class="stat">📅 Day <span id="ui-day">1</span></div>
+            </div>
+
+            <!-- Mobile Controls -->
+            <div id="controls-layer">
+                <div id="joystick-container">
+                    <div id="joystick-knob"></div>
+                </div>
+                <div id="action-btn">🎯</div>
+            </div>
+        </div>
+
+        <!-- Messages & Notifications -->
+        <div id="notification-box" class="hidden"></div>
+
+        <!-- Modals -->
+        <div id="modal-overlay" class="hidden">
+            
+            <!-- ATM Modal -->
+            <div id="atm-modal" class="modal hidden">
+                <button class="close-btn">❌</button>
+                <h2>🏧 Deposit Study Time</h2>
+                <p>Earn ₹2000 per 1 Hour of study!</p>
+                
+                <div class="input-group">
+                    <label>Hours:</label>
+                    <input type="number" id="atm-hours" min="0" max="24" placeholder="0">
+                </div>
+                <div class="input-group">
+                    <label>Minutes:</label>
+                    <input type="number" id="atm-minutes" min="0" max="59" step="30" placeholder="0">
+                </div>
+                
+                <button id="deposit-btn">Deposit Money</button>
+
+                <!-- ATM Animations Area -->
+                <div id="atm-animation-area">
+                    <div id="receipt-slot"></div>
+                    <div id="receipt-paper" class="hidden">
+                        <p>Receipt</p>
+                        <p>+₹<span id="receipt-amount">0</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- House / Stats Modal -->
+            <div id="house-modal" class="modal hidden">
+                <button class="close-btn">❌</button>
+                <h2>🏠 My Cozy Home</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">💰 Money: ₹<span id="house-money">0</span></div>
+                    <div class="stat-card">⭐ XP: <span id="house-xp">0</span></div>
+                    <div class="stat-card">📅 Current Day: <span id="house-day">1</span></div>
+                    <div class="stat-card">⏳ Total Study: <span id="house-study-hours">0</span> hrs</div>
+                </div>
+
+                <div class="house-actions">
+                    <button id="buy-chicken-btn">🐔 Buy Chicken (₹4000)</button>
+                    <button id="save-game-btn">💾 Save Game</button>
+                    <button id="sleep-btn">🛌 Sleep (Next Day)</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+  </html>
